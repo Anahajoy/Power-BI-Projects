@@ -12,41 +12,28 @@ https://data-explorer.oecd.org/vis?fs[0]=Topic%2C1%7CSociety%23SOC%23%7CWell-bei
 
 
 # Progress bar measure
-safteybar = 
-VAR totalBlocks = 20               -- total rectangles
-VAR per = [saftey%] * 100          -- percentage
-VAR filledBlocks = ROUND(per / 100 * totalBlocks, 0)
-VAR green = "%2349CF8F"
-VAR yellow = "%23FE782E"
-VAR red = "%23D9534F"
-VAR yellowlimit = 20
+```dax
+saftetybar = 
+VAR totalBlocks = 20 -- total rectangles 
+VAR per = [safetey%] * 100 -- percentage 
+VAR filledBlocks = ROUND(per / 100 * totalBlocks, 0) 
+VAR green = "%23C9F0FF" 
+VAR yellow = "%23FE7B2E" 
+VAR red = "%23D9534F" 
+VAR yellowlimit = 20 
 VAR redlimit = 10
 
- --- the colour code based on condition 
-VAR blockColor =
-    SWITCH(
-        TRUE(),
-        per <= redlimit, red,
-        per <= yellowlimit, yellow,
-        per > yellowlimit, green
-    )
+--- the colour code based on condition 
+VAR blockColor = SWITCH( TRUE(), 
+    per <= redlimit, red, 
+    per <= yellowlimit, yellow, 
+    per > yellowlimit, green )
 
--- generate SVG rectangles
-VAR svgBlocks =
-    CONCATENATEX(
-        GENERATESERIES(1, totalBlocks, 1),
-        "<rect x='" & (([Value]-1)*12) & "' y='0' width='10' height='20' fill='" &
-        IF([Value] <= filledBlocks, blockColor, "%23e0e0e0") &
-        "' rx='2' ry='2'/>",
-        ""
-    )
+-- generate SVG rectangles 
+VAR svgBlocks = CONCATENATEX( GENERATESERIES(1, totalBlocks, 1), "", "" )
 
--- genefate the final bar
-RETURN
-    "data:image/svg+xml;utf8," &
-    "<svg width='" & (totalBlocks*12) & "' height='20' xmlns='http://www.w3.org/2000/svg'>" &
-    svgBlocks &
-    "</svg>"
+-- generate the final bar 
+RETURN "data:image/svg+xml;utf8," & "" & svgBlocks & ""
 
 
 
