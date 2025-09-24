@@ -2,7 +2,6 @@
 The dashboard was inspired by the Workout Wednesday Challenge and showcases creative approaches to data storytelling, making insights clear, interactive, and actionable.
 
 # Data source link 
-'''
 -- selected only from the **domain** - work&quality job, health, saftey,subjective well being  
 -- from the **sex** - female, male  
 -- from the **time period** range from 2010-2025  
